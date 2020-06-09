@@ -13,6 +13,7 @@
   }
 
   .row-info {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +29,7 @@
   }
 
   .column {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,8 +56,51 @@
 
     &.selected {
       border: none;
-      outline: 2px solid #3c74ff;
+      outline: 2px solid $primary-color;
       z-index: 2;
+    }
+  }
+
+  .col-resize,
+  .row-resize {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    background-color: $primary-color;
+    z-index: 1000;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .col-resize {
+    top: 0;
+    width: 5px;
+    cursor: col-resize;
+
+    .long-down-line {
+      position: absolute;
+      width: 1px;
+      background: $primary-color;
+      height: 100vh;
+      right: calc(50% - 1px);
+    }
+  }
+
+  .row-resize {
+    left: 0;
+    bottom: -1px;
+    height: 5px;
+    cursor: row-resize;
+
+    .long-right-line {
+      position: absolute;
+      height: 1px;
+      background: $primary-color;
+      width: 100vw;
+      bottom: calc(50% - 1px);
     }
   }
 }
