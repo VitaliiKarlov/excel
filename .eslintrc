@@ -6,10 +6,15 @@
     "no-unused-vars": 1,
     "import/prefer-default-export": 0,
     "operator-linebreak": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "linebreak-style": 0,
+    "no-use-before-define": 0,
+    "no-restricted-syntax": 0,
+    "guard-for-in": 0
   },
   "globals": {
-    "document": true
+    "document": true,
+    "window": true
   },
   "parser": "babel-eslint"
 }

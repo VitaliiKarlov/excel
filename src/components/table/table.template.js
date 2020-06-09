@@ -3,26 +3,33 @@ const CODES = {
   Z: 90,
 };
 
-function createCell(el) {
+function createCell(el, index) {
   return /* html */ `
-    <div class="cell" contenteditable>
+    <div class="cell" contenteditable data-col=${index}>
       ${el}
     </div>
   `;
 }
 
-function createCol(el) {
+function createCol(el, index) {
   return /* html */ `
-    <div class="column">
+    <div class="column" data-type="resizable" data-col=${index}>
       ${el}
+      <div class="col-resize" data-resize="col"></div>
     </div>
   `;
 }
 
 function createRow(content, index = '') {
+  const resize = index
+    ? '<div class="row-resize" data-resize="row"></div>'
+    : '';
   return /* html */ `
-    <div class="row">
-      <div class="row-info">${index}</div>
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${index}
+        ${resize}
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `;

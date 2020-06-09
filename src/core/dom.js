@@ -34,7 +34,39 @@ class Dom {
       newNode = node.$el;
     }
     this.$el.append(newNode);
+
     return this;
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((style) => {
+      this.$el.style[style] = styles[style];
+    });
+    return this;
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  remove() {
+    this.$el.remove();
+  }
+
+  get getStyle() {
+    return window.getComputedStyle(this.$el);
   }
 }
 
