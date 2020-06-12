@@ -3,12 +3,18 @@ const CODES = {
   Z: 90,
 };
 
-function createCell(el, index) {
-  return /* html */ `
-    <div class="cell" contenteditable data-col=${index}>
-      ${el}
-    </div>
+function createCell(row) {
+  return function a(_, col) {
+    return /* html */ `
+    <div
+      class="cell"
+      contenteditable
+      data-col=${col}
+      data-type="cell"
+      data-id=${row}:${col}
+    ></div>
   `;
+  };
 }
 
 function createCol(el, index) {
@@ -39,8 +45,8 @@ function toChar(_, index) {
   return String.fromCharCode(CODES.A + index);
 }
 
-export function createTable(rowsCount = 20) {
-  const colsCount = CODES.Z - CODES.A + 1;
+export function createTable(rowsCount = 20, colsCount = 26) {
+  // const colsCount = CODES.Z - CODES.A + 1;
   const rows = [];
 
   const cols = new Array(colsCount)
@@ -51,9 +57,9 @@ export function createTable(rowsCount = 20) {
 
   rows.push(createRow(cols));
 
-  for (let i = 0; i < rowsCount; i++) {
-    const cells = new Array(colsCount).fill('').map(createCell).join('');
-    rows.push(createRow(cells, i + 1));
+  for (let row = 0; row < rowsCount; row++) {
+    const cells = new Array(colsCount).fill('').map(createCell(row)).join('');
+    rows.push(createRow(cells, row + 1));
   }
 
   return rows.join('');
