@@ -6,24 +6,26 @@ export default class Formula extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       ...options,
+      subscribe: ['currentText'],
     });
 
     this.name = 'Formula';
     this.listeners = ['input', 'keydown'];
+    this.subscribe = ['currentText'];
   }
 
   init() {
     super.init();
 
-    const $formula = this.$root.find('.input');
+    this.$formula = this.$root.find('.input');
 
-    this.$on('table:select', (text) => {
-      $formula.text(text);
+    this.$on('table:select', ($cell) => {
+      this.$formula.text($cell.data.value);
     });
+  }
 
-    this.$on('table:input', (text) => {
-      $formula.text(text);
-    });
+  storeChanged({ currentText }) {
+    this.$formula.text(currentText);
   }
 
   toHTML() {

@@ -24,11 +24,27 @@ class Dom {
   }
 
   text(text) {
-    if (typeof text === 'string') {
+    if (typeof text !== 'undefined') {
       this.$el.textContent = text;
       return this;
     }
     return this.$el.textContent;
+  }
+
+  val(text) {
+    if (typeof text !== 'undefined') {
+      this.$el.value = text;
+      return this;
+    }
+    return this.$el.value;
+  }
+
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value);
+      return this;
+    }
+    return this.$el.getAttribute(name);
   }
 
   clear() {
@@ -89,6 +105,13 @@ class Dom {
       this.$el.style[style] = styles[style];
     });
     return this;
+  }
+
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s];
+      return res;
+    }, {});
   }
 
   closest(selector) {
