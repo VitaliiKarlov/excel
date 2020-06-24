@@ -38,6 +38,7 @@ export default class Header extends ExcelComponent {
     const data = $target.data.button;
 
     if (data === 'remove') {
+      // eslint-disable-next-line no-alert
       const decision = window.confirm('Удалить таблицу?');
 
       if (decision) {
